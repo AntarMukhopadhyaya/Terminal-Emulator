@@ -71,6 +71,18 @@ if __name__ == "__main__":
             elif  'getcwd' in query:
                 print(Fore.YELLOW+current_working_directory)
                 print(Style.RESET_ALL)
+            elif 'cd' in query:
+                query = query.replace("cd", ' ')
+                path = query.lstrip()
+                full_path = os.path.join(path,current_working_directory,path)
+                if os.path.exists(path):
+                    change_directory(path)
+                elif os.path.exists(full_path):
+                    change_directory(full_path)
+                else:
+                    print(Fore.RED + "Error >>> The specified path does not exist.")
+                    print(Style.RESET_ALL)
+
             elif 'help' in query:
                 help_screen()
 
@@ -120,5 +132,4 @@ if __name__ == "__main__":
             else:
                 print(Fore.RED + "Error >>> No Such Command Found")
                 print(Style.RESET_ALL)
-
 

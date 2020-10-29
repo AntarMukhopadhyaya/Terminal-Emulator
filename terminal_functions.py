@@ -26,6 +26,8 @@ def help_screen():
     print("check internet >>>   Check internet\n")
     print("check ip >>>   Prints ipV4 and hostname\n")
     print("remove >>>   Remove specified file\n")
+    print("move  >>>   Move specified file\n")
+
     print(Style.RESET_ALL)
 
 
@@ -199,13 +201,10 @@ def move_file():
         else:
             print("Error >>> File does not exists.")
 
-
-
-
-
-
-           
-     
-
-       
+def change_directory(path_name):
+    try:
+        os.chdir(path_name)
+    except  Exception as e:
+        print(f"Error >>> {e} ")
+    
      
