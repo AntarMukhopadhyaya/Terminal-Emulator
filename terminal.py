@@ -1,24 +1,30 @@
-import sys, os, glob, platform, webbrowser,logging, datetime,zipfile
-from termcolor import  colored
-from colorama import  Fore, Back,Style
-from terminal_functions import  *
-current_working_directory = os.getcwd()
-current_working_directory = colored(current_working_directory, 'yellow', 'on_grey')
+import sys
+import os
+import glob
+import platform
+import webbrowser
+import logging
+import datetime
+import zipfile
 import shutil
+from termcolor import colored
+from colorama import Fore, Back, Style, init
+from terminal_functions import *
+current_working_directory = os.getcwd()
+current_working_directory = colored(
+    current_working_directory, 'yellow', 'on_grey')
+
 
 LOG_FILENAME = 'errors.log'
 logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG)
 
 
-
 if __name__ == "__main__":
-    print(Fore.YELLOW+"PyTEmulator  >>> Python Terminal Emulator")
-    current_version()
-    print(str(datetime.datetime.now()))
-    print(Style.RESET_ALL)
-    
-    while True:
+    init(convert=True)
+    star_path = "C:\\Users\\HP"
+    on_start(star_path)
 
+    while True:
 
         query = input(os.getcwd() + '@user>')
         if isinstance(query, str):
@@ -41,8 +47,8 @@ if __name__ == "__main__":
                         os.startfile("C:\\Windows\\System32\\notepad.exe")
                     else:
                         print("Make Sure you are Windows Platform")
-                        
-                if  'site' in query:
+
+                if 'site' in query:
                     site = query.replace('site', '')
                     webbrowser.open(site)
 
@@ -59,22 +65,19 @@ if __name__ == "__main__":
                 elif 'ip' in query:
                     show_ip()
 
-
             elif 'read' in query or 'cat' in query:
-                query = query.replace('read', " ")
+                query = query.replace('read', "")
                 file_name = query.lstrip()
+                print(file_name)
                 read_file(file_name)
-                 
-           
-                 
 
-            elif  'getcwd' in query:
+            elif 'getcwd' in query:
                 print(Fore.YELLOW+current_working_directory)
                 print(Style.RESET_ALL)
             elif 'cd' in query:
                 query = query.replace("cd", ' ')
                 path = query.lstrip()
-                full_path = os.path.join(path,current_working_directory,path)
+                full_path = os.path.join(path, current_working_directory, path)
                 if os.path.exists(path):
                     change_directory(path)
                 elif os.path.exists(full_path):
@@ -90,46 +93,37 @@ if __name__ == "__main__":
                 os.system('cls' if os.name == 'nt' else 'clear')
 
             elif 'dirs' in query or 'ls' in query:
-               list_directories()
+                list_directories()
             elif 'run' in query:
                 file_name = query.replace('run', '')
                 file_name = file_name.lstrip()
                 run_script(file_name)
             elif 'mkdir' in query or 'folder' in query:
-                    directory_name = query.replace('mkdir', ' ')
-                    directory_name = directory_name.lstrip()
-                    create_directory(directory_name)
+                directory_name = query.replace('mkdir', ' ')
+                directory_name = directory_name.lstrip()
+                create_directory(directory_name)
             elif 'create' in query:
-                file_name = query.replace('create',' ')
+                file_name = query.replace('create', ' ')
                 file_name = file_name.lstrip()
                 create_file(file_name)
-                     
-      
-            
-            elif  'remove' in query:
-                
-                query = query.replace('remove', ' ')
-                file_name = query.lstrip()
-            
+
+            elif 'remove' in query:
+
+                file_name = query.replace('remove', ' ')
+                file_name = file_name.lstrip()
+
                 remove_file_or_directory(file_name)
             elif 'unzip' in query:
                 query = query.replace('unzip', ' ')
                 query = query.lstrip()
                 unzip_file(query)
-            elif  'move' in query:
+            elif 'move' in query:
                 move_file()
-             
 
-            
-
-
-
-
-            elif 'admin'  in query:
+            elif 'admin' in query:
                 run_as_admin()
             elif query == "":
-                print("") 
+                print("")
             else:
                 print(Fore.RED + "Error >>> No Such Command Found")
                 print(Style.RESET_ALL)
-
