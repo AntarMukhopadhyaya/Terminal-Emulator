@@ -250,3 +250,11 @@ def change_directory(path_name):
         os.chdir(path_name)
     except Exception as e:
         print(f"Error >>> {e} ")
+
+
+def rename_file(file_name, rename_name):
+    try:
+        os.rename(file_name, rename_name)
+    except Exception as e:
+        print(Fore.RED + "Error >>> " + e)
+        print(Style.RESET_ALL)

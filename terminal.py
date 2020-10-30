@@ -106,6 +106,13 @@ if __name__ == "__main__":
                 file_name = query.replace('create', ' ')
                 file_name = file_name.lstrip()
                 create_file(file_name)
+            elif 'rename' in query:
+                file_name = str(
+                    input(Fore.YELLOW + "Enter the Name of the file you want to change: "))
+                rename_name = str(input("Enter the rename name: "))
+                print(Style.RESET_ALL)
+
+                rename_file(file_name, rename_name)
 
             elif 'remove' in query:
 
